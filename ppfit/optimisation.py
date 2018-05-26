@@ -42,10 +42,10 @@ class LBFGSB_Minimizer:
 class Nelder_Mead_Minimizer:
 
     def __init__( self, opts ):
-        self.options= { 'ftol': opts[ 'tolerance' ][ 'ftol' ],
-                        'xtol': opts[ 'tolerance' ][ 'xtol' ],
-                        'disp': opts[ 'verbose' ],
-                        'maxiter': opts[ 'maxiter' ] }
+        self.options= { 'ftol': float(opts[ 'tolerance' ][ 'ftol' ]),
+                        'xtol': float(opts[ 'tolerance' ][ 'xtol' ]),
+                        'disp': float(opts[ 'verbose' ]),
+                        'maxiter': float(opts[ 'maxiter' ]) }
 
     def minimize( self, function, initial_values ):
         print( 'Nelder-Mead minimisation' )
