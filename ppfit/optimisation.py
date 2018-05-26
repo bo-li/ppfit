@@ -131,7 +131,7 @@ def optimise( function, fitting_parameters, opts ):
     # Set the options for the minimization algo in BH
         if opts[ 'basin_hopping' ][ 'method' ] in ('L-BFGS-B','CG'):
             options = { 'ftol': opts[ 'basin_hopping' ][ 'tolerance' ][ 'ftol' ],
-                        'gtol': opts[ 'basin_hopping' [ 'tolerance' ]][ 'gtol' ],
+                        'gtol': opts[ 'basin_hopping' ][ 'tolerance' ][ 'gtol' ],
                         'disp': opts[ 'verbose' ],
                         'maxiter': opts[ 'basin_hopping' ][ 'maxiter' ],
                         'eps': opts[ 'basin_hopping' ][ 'stepsize' ] }
