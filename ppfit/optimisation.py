@@ -18,11 +18,11 @@ class LBFGSB_Minimizer:
         Args:
             opts (ppfit.Options): Options objects with attributes { ftol_min, gtol_min, verbose, maxiter_min, stepsize_min } set.
         """
-        self.options = { 'ftol': opts[ 'tolerance' ][ 'ftol' ],
-                         'gtol': opts[ 'tolerance' ][ 'gtol' ],
-                         'disp': opts[ 'verbose' ],
-                         'maxiter': opts[ 'maxiter' ],
-                         'eps': opts[ 'stepsize' ] }
+        self.options = { 'ftol': float(opts[ 'tolerance' ][ 'ftol' ]),
+                         'gtol': float(opts[ 'tolerance' ][ 'gtol' ]),
+                         'disp': float(opts[ 'verbose' ]),
+                         'maxiter': float(opts[ 'maxiter' ]),
+                         'eps': float(opts[ 'stepsize' ]) }
 
     def minimize( self, function, initial_values, bounds ): # can initial values and bounds be passed in as a Fitting_Parameter_Set object?
         """Minimize a function using scipy.optimize.minimize( method = 'L-BFGS-B' ).
