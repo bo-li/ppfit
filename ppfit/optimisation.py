@@ -96,7 +96,7 @@ def optimise( function, fitting_parameters, opts ):
             results_min = minimizer.minimize( function, pot_values )
         else:
             sys.exit( 'minimization method {} not supported'.format( opts[ 'method' ] ) )
-        output( results_min.message )
+        output( str(results_min.message) )
         tot_values = np.concatenate((const_values,results_min.x),axis=0)
 
         # Write a results file 
