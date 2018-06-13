@@ -55,11 +55,11 @@ class Nelder_Mead_Minimizer:
 class CG_Minimizer:
 
     def __init__( self, opts ):
-        self.options = { 'gtol': opts[ 'tolerance'][ 'gtol' ],
-                         'disp': opts[ 'verbose' ],
-                         'maxiter': opts[ 'maxiter' ],
-                         'eps': opts[ 'stepsize' ] }
-        self.tol = opts[ 'tolerance' ][ 'ftol' ]
+        self.options = { 'gtol': float(opts[ 'tolerance'][ 'gtol' ]),
+                         'disp': float(opts[ 'verbose' ]),
+                         'maxiter': float(opts[ 'maxiter' ]),
+                         'eps': float(opts[ 'stepsize' ]) }
+        self.tol = float(opts[ 'tolerance' ][ 'ftol' ])
 
     def minimize( self, function, initial_values ): # bounds?
         print( 'CG minimisation' )
@@ -130,16 +130,20 @@ def optimise( function, fitting_parameters, opts ):
         output( 'The temperature is set to: '+str(temperature)+'\n' )
     # Set the options for the minimization algo in BH
         if opts[ 'basin_hopping' ][ 'method' ] in ('L-BFGS-B','CG'):
-            options = { 'ftol': opts[ 'basin_hopping' ][ 'tolerance' ][ 'ftol' ],
-                        'gtol': opts[ 'basin_hopping' ][ 'tolerance' ][ 'gtol' ],
-                        'disp': opts[ 'verbose' ],
-                        'maxiter': opts[ 'basin_hopping' ][ 'maxiter' ],
-                        'eps': opts[ 'basin_hopping' ][ 'stepsize' ] }
+            options = { 'ftol': float(opts[ 'basin_hopping' ][ 'tolerance' ][
+                'ftol' ]),
+                        'gtol': float(opts[ 'basin_hopping' ][ 'tolerance' ][
+                            'gtol' ]),
+                        'disp': float(opts[ 'verbose' ]),
+                        'maxiter': float(opts[ 'basin_hopping' ][ 'maxiter' ]),
+                        'eps': float(opts[ 'basin_hopping' ][ 'stepsize' ]) }
         elif opts[ 'basin_hopping' ][ 'method' ] == 'Nelder-Mead':
-            options = { 'ftol': opts[ 'basin_hopping' ][ 'tolerance' ][ 'ftol' ],
-                        'xtol': opts[ 'basin_hopping' ][ 'tolerance' ][ 'xtol' ],
-                        'disp': opts[ 'verbose' ],
-                        'maxiter': opts[ 'basin_hopping' ][ 'maxiter' ] }
+            options = { 'ftol': float(opts[ 'basin_hopping' ][ 'tolerance' ][
+                'ftol' ]),
+                        'xtol': float(opts[ 'basin_hopping' ][ 'tolerance' ][
+                            'xtol' ]),
+                        'disp': float(opts[ 'verbose' ]),
+                        'maxiter': float(opts[ 'basin_hopping' ][ 'maxiter' ]) }
         else:
             sys.exit('Minimization method {} not supported'.format( opts[ 'basin_hopping' ][ 'method' ] ) )
     # Bounds for BH
@@ -153,15 +157,18 @@ def optimise( function, fitting_parameters, opts ):
                                  'options': options}
         results_BH = basinhopping( function, 
                                    x0 = pot_values,
-                                   niter = opts[ 'basin_hopping' ][ 'maxiter' ], # TODO check this
+                                   niter = float(opts[ 'basin_hopping' ][
+                                       'maxiter' ]), # TODO check this
                                    T = temperature, 
-                                   stepsize = opts[ 'basin_hopping'][ 'timestep' ],
+                                   stepsize = float(opts[ 'basin_hopping'][
+                                       'timestep' ]),
                                    minimizer_kwargs = minimizer_kwargs,
                                    take_step = MyTakeStep( step_sizes ),
-                                   disp = opts[ 'verbose' ],
+                                   disp = float(opts[ 'verbose' ]),
                                    accept_test = mybounds,
                                    callback = write_restart, 
-                                   niter_success = opts[ 'basin_hopping' ][ 'niter_success' ] )
+                                   niter_success = float(opts[ 'basin_hopping'
+                                       ][ 'niter_success' ]) )
         output( results_BH.message[0] )
         tot_values = np.concatenate((const_values,results_BH.x),axis=0)
     #
