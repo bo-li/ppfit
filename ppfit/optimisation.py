@@ -103,7 +103,7 @@ def optimise( function, fitting_parameters, opts ):
         write_Results_min = WriteRestart(tot_vars,const_values,to_fit_and_not,tot_values_min,tot_values_max,all_step_sizes,'RESULTS_min')
         write_Results_min(results_min.x,results_min.fun,accepted=1)
 
-        function.evaluate( results_min.x, plot = True )
+        function( results_min.x, plot = True )
         mkdir_p('./min-errors-pdfs')
         os.system('mv *.pdf ./min-errors-pdfs')
 
