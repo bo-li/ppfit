@@ -1,4 +1,4 @@
-import sys
+import sys, os
 import numpy as np
 from ppfit.inputoutput import output, mkdir_p
 from ppfit.basin_hopping import MyTakeStep, WriteRestart, MyBounds
